@@ -1,5 +1,18 @@
 $(document).ready(function () {
   var currentQuestion;
+  var timer = 10;
+
+  var interval = setInterval(function () {
+    updateTimer(-1);
+    if (timer === 0) {
+      clearInterval(interval);
+    }
+  }, 1000);
+
+  var updateTimer = function (amount) {
+    timer += amount;
+    $('#timer').text(timer);
+  };
 
   var numberGenerator = function (size) {
     return Math.ceil(Math.random() * size);
@@ -26,6 +39,7 @@ $(document).ready(function () {
     if (userInput === answer) {
       renderNewQuestion();
       $('#answer-input').val('');
+      updateTimer(+1);
     }
   };
 

@@ -13,7 +13,10 @@ h2 {
   color: black;
   text-align: center;
   font-weight: bolder;
-  padding-top: 250px;
+}
+
+h3 {
+  padding-top: 100px;
 }
 
 #answer-input {
