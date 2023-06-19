@@ -17,6 +17,20 @@ $(document).ready(function () {
   };
 
   // ON LOAD
-  currentQuestion = questionGenerator();
-  $('#equation').text(currentQuestion.equation);
+  var renderNewQuestion = function () {
+    currentQuestion = questionGenerator();
+    $('#equation').text(currentQuestion.equation);
+  };
+
+  var checkAnswer = function (userInput, answer) {
+    if (userInput === answer) {
+      renderNewQuestion();
+    }
+  };
+
+  $('#answer-input').on('keyup', function () {
+    checkAnswer(Number($(this).val()), currentQuestion.answer);
+  });
+
+  renderNewQuestion();
 });

@@ -15,3 +15,7 @@ h2 {
   font-weight: bolder;
   padding-top: 250px;
 }
+
+#answer-input {
+  margin-left: 410px;
+}
