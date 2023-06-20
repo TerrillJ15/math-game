@@ -1,25 +1,40 @@
 $(document).ready(function () {
   var currentQuestion;
-  var timer = 10;
+  var timer = 0;
   var interval;
   var score = 0;
+  var highScore = 0;
 
   var performInterval = function () {
     updateTimer(-1);
     if (timer === 0) {
       clearInterval(interval);
       interval = undefined;
+      showPlayAgain();
     }
   };
 
   var startGame = function () {
     if (!interval) {
-      if (timer === 0) {
-        updateTimer(10);
-        updateScore(-score);
-      }
+      showGame();
+      updateTimer(10);
+      updateScore(-score);
       interval = setInterval(performInterval, 1000);
     }
+  };
+
+  var showGame = function () {
+    $('#menu').hide();
+    $('#game').show();
+    $('#answer-input').focus();
+    renderNewQuestion();
+  };
+
+  var showPlayAgain = function () {
+    $('#menu').show();
+    $('#instructions').hide();
+    $('#game').hide();
+    $('#message').text('Game Over! Please play again.');
   };
 
   var updateTimer = function (amount) {
@@ -63,9 +78,16 @@ $(document).ready(function () {
   };
 
   $('#answer-input').on('keyup', function () {
-    startGame();
     checkAnswer(Number($(this).val()), currentQuestion.answer);
   });
 
-  renderNewQuestion();
+  $(document).on('keyup', function (event) {
+    if (event.key === 'Enter' && timer === 0) {
+      startGame();
+    }
+  });
+
+  $('#btn-start').click(function () {
+    startGame();
+  });
 });

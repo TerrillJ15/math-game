@@ -34,16 +34,19 @@
           <div
             id="menu"
             class="row"
-            onclick="startGame()"
           >
             <div class="col-12 text-center">
-              <h6 class="">
-                You have 10 seconds to answer.<br /><br />Each successful answer
-                increases your score by 1 point<br />and increases the time by 1
-                second.<br /><br />Game ends when there is no time left.
+              <h3 id="message">Welcome!</h3>
+              <h6 id="instructions">
+                You have 10 seconds to answer.<br />Game ends when there is no
+                time left.<br />Successful answers increase your score by 1
+                point and time by 1 second.
               </h6>
-              <button class="btn btn-lg btn-outline-secondary mt-4">
-                Click to Play
+              <button
+                id="btn-start"
+                class="btn btn-lg btn-outline-secondary mt-4"
+              >
+                Press Enter or Click to Play
               </button>
             </div>
           </div>
