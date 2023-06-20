@@ -1,17 +1,33 @@
 $(document).ready(function () {
   var currentQuestion;
   var timer = 10;
+  var interval;
+  var score = 0;
 
-  var interval = setInterval(function () {
-    updateTimer(-1);
-    if (timer === 0) {
-      clearInterval(interval);
+  var startGame = function () {
+    if (!interval) {
+      if (timer === 0) {
+        updateTimer(10);
+        updateScore(-score);
+      }
+      interval = setInterval(function () {
+        updateTimer(-1);
+        if (timer === 0) {
+          clearInterval(interval);
+          interval = undefined;
+        }
+      }, 1000);
     }
-  }, 1000);
+  };
 
   var updateTimer = function (amount) {
     timer += amount;
     $('#timer').text(timer);
+  };
+
+  var updateScore = function (amount) {
+    score += amount;
+    $('#score').text(score);
   };
 
   var numberGenerator = function (size) {
@@ -40,10 +56,12 @@ $(document).ready(function () {
       renderNewQuestion();
       $('#answer-input').val('');
       updateTimer(+1);
+      updateScore(+1);
     }
   };
 
   $('#answer-input').on('keyup', function () {
+    startGame();
     checkAnswer(Number($(this).val()), currentQuestion.answer);
   });
 
