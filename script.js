@@ -4,19 +4,21 @@ $(document).ready(function () {
   var interval;
   var score = 0;
 
+  var performInterval = function () {
+    updateTimer(-1);
+    if (timer === 0) {
+      clearInterval(interval);
+      interval = undefined;
+    }
+  };
+
   var startGame = function () {
     if (!interval) {
       if (timer === 0) {
         updateTimer(10);
         updateScore(-score);
       }
-      interval = setInterval(function () {
-        updateTimer(-1);
-        if (timer === 0) {
-          clearInterval(interval);
-          interval = undefined;
-        }
-      }, 1000);
+      interval = setInterval(performInterval, 1000);
     }
   };
 

@@ -23,16 +23,54 @@
   </head>
   <body>
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-12 col-md-8 mx-md-auto">
-          <h1>10s Math Game</h1>
-          <h3>Seconds Left: <span id="timer"></span></h3>
-          <h2 id="equation"></h2>
-          <input
-            id="answer-input"
-            type="text"
-          />
-          <h4>Score: <span id="score"></span></h4>
+      <div class="row pt-md-5 mt-md-5">
+        <div class="col-12 col-md-8 mx-md-auto pt-md-4 mt-md-4">
+          <div class="row">
+            <div class="col-12">
+              <h4>High Score: <span id="high-score"></span></h4>
+              <h4>Current Score: <span id="score"></span></h4>
+            </div>
+          </div>
+          <div
+            id="menu"
+            class="row"
+            onclick="startGame()"
+          >
+            <div class="col-12 text-center">
+              <h6 class="">
+                You have 10 seconds to answer.<br /><br />Each successful answer
+                increases your score by 1 point<br />and increases the time by 1
+                second.<br /><br />Game ends when there is no time left.
+              </h6>
+              <button class="btn btn-lg btn-outline-secondary mt-4">
+                Click to Play
+              </button>
+            </div>
+          </div>
+          <div
+            id="game"
+            class="row"
+            style="display: none"
+          >
+            <div class="col-12">
+              <div class="row">
+                <div class="col-auto mx-auto text-center">
+                  <h3>Seconds Left: <br /><span id="timer">10</span></h3>
+                </div>
+              </div>
+              <div class="row pt-4">
+                <div class="col-auto mx-auto">
+                  <span class="text-center">
+                    <h2 id="equation"></h2>
+                    <input
+                      id="answer-input"
+                      type="text"
+                    />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
