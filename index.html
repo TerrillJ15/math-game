@@ -40,11 +40,54 @@
               <h6 id="instructions">
                 You have 10 seconds to answer.<br />Game ends when there is no
                 time left.<br />Successful answers increase your score by 1
-                point and time by 1 second.
+                point and time by 1 second.<br />Please select operands to use:
               </h6>
+              <div class="row d-flex justify-content-center">
+                <div class="col-auto pr-2">
+                  <input
+                    id="add"
+                    type="checkbox"
+                    checked
+                  />
+                  <label for="add">+</label>
+                </div>
+                <div class="col-auto pr-2">
+                  <input
+                    id="subtract"
+                    type="checkbox"
+                  />
+                  <label
+                    for="subtract"
+                    class="pr-2"
+                    >-</label
+                  >
+                </div>
+                <div class="col-auto pr-2">
+                  <input
+                    id="multiply"
+                    type="checkbox"
+                  />
+                  <label
+                    for="multiply"
+                    class="pr-2"
+                    >x</label
+                  >
+                </div>
+                <div class="col-auto pr-2">
+                  <input
+                    id="divide"
+                    type="checkbox"
+                  />
+                  <label
+                    for="divide"
+                    class="toggleFix"
+                    >∕</label
+                  >
+                </div>
+              </div>
               <button
                 id="btn-start"
-                class="btn btn-lg btn-outline-secondary mt-4"
+                class="btn btn-lg btn-outline-secondary mt-2"
               >
                 Press Enter or Click to Play
               </button>

@@ -1,5 +1,6 @@
 $(document).ready(function () {
   var currentQuestion;
+  var selectedOperands = ['add']; // add; subtract; multiply; divide
   var timer = 0;
   var interval;
   var score = 0;
@@ -20,6 +21,7 @@ $(document).ready(function () {
       updateTimer(10);
       updateScore(-score);
       interval = setInterval(performInterval, 1000);
+      $('#answer-input').val('');
     }
   };
 
@@ -32,7 +34,6 @@ $(document).ready(function () {
 
   var showPlayAgain = function () {
     $('#menu').show();
-    $('#instructions').hide();
     $('#game').hide();
     $('#message').text('Game Over! Please play again.');
   };
@@ -56,12 +57,43 @@ $(document).ready(function () {
   };
 
   var questionGenerator = function () {
-    var question = {};
-    var num1 = numberGenerator(10);
-    var num2 = numberGenerator(10);
+    // get random equation type to use from selection
+    var operandSeed = Math.floor(Math.random() * selectedOperands.length);
 
-    question.answer = num1 + num2;
-    question.equation = String(num1) + ' + ' + String(num2);
+    var operand = selectedOperands[operandSeed];
+
+    var question = {};
+
+    var num1;
+    var num2;
+    var type;
+    var valid = false;
+    while (!valid) {
+      num1 = numberGenerator(10);
+      num2 = numberGenerator(10);
+      switch (operand) {
+        case 'subtract':
+          type = '-';
+          question.answer = num1 - num2;
+          valid = question.answer > 0;
+          break;
+        case 'multiply':
+          type = 'x';
+          question.answer = num1 * num2;
+          valid = true;
+          break;
+        case 'divide':
+          type = '/';
+          question.answer = num1 / num2;
+          valid = Number.isInteger(question.answer);
+          break;
+        default:
+          type = '+';
+          question.answer = num1 + num2;
+          valid = true;
+      }
+    }
+    question.equation = `${num1} ${type} ${num2}`;
 
     return question;
   };
@@ -94,4 +126,18 @@ $(document).ready(function () {
   $('#btn-start').click(function () {
     startGame();
   });
+
+  var updateOperands = function (operand) {
+    var checked = $(`#${operand}`).is(':checked');
+    if (checked) {
+      selectedOperands.push(operand);
+    } else {
+      selectedOperands = selectedOperands.filter(o => o !== operand);
+    }
+  };
+
+  $('#add').click(() => updateOperands('add'));
+  $('#subtract').click(() => updateOperands('subtract'));
+  $('#multiply').click(() => updateOperands('multiply'));
+  $('#divide').click(() => updateOperands('divide'));
 });
