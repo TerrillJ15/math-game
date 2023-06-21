@@ -45,6 +45,10 @@ $(document).ready(function () {
   var updateScore = function (amount) {
     score += amount;
     $('#score').text(score);
+    if (score > highScore) {
+      highScore = score;
+      $('#high-score').text(highScore);
+    }
   };
 
   var numberGenerator = function (size) {
