@@ -5,6 +5,7 @@ $(document).ready(function () {
   var interval;
   var score = 0;
   var highScore = 0;
+  var numberLimit = 10;
 
   var performInterval = function () {
     updateTimer(-1);
@@ -69,8 +70,8 @@ $(document).ready(function () {
     var type;
     var valid = false;
     while (!valid) {
-      num1 = numberGenerator(10);
-      num2 = numberGenerator(10);
+      num1 = numberGenerator(numberLimit);
+      num2 = numberGenerator(numberLimit);
       switch (operand) {
         case 'subtract':
           type = '-';
@@ -140,4 +141,9 @@ $(document).ready(function () {
   $('#subtract').click(() => updateOperands('subtract'));
   $('#multiply').click(() => updateOperands('multiply'));
   $('#divide').click(() => updateOperands('divide'));
+
+  $('#number-limit-slider').on('input', function () {
+    numberLimit = $('#number-limit-slider').val();
+    $('#number-limit').html(numberLimit);
+  });
 });
